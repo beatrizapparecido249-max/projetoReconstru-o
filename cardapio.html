@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEATRIZ - Cardápio Completo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">BEATRIZ BURGER</div>
+        <div class="nav-links">
+            <a href="index.html">Início</a>
+            <a href="cardapio.html" class="active">Cardápio</a>
+            <button id="cart-btn" class="cart-btn">
+                🛒 Carrinho (<span id="cart-count">0</span>)
+            </button>
+        </div>
+    </nav>
+
+    <section class="menu-section page-menu">
+        <h2>Nosso Menu de Hambúrgueres</h2>
+        <p class="section-subtitle">Escolha seu lanche artesanal e monte do seu jeito!</p>
+        
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="img-container">
+                    <img src="img/hamburguer1.jpg" alt="O Original" class="menu-item-img">
+                </div>
+                <div class="menu-item-info">
+                    <div>
+                        <h3>O Original</h3>
+                        <p class="menu-item-desc">Blend secreto de 160g, queijo prato derretido, alface americana, tomate fresco e maionese artesanal da casa.</p>
+                    </div>
+                    <div class="menu-item-footer">
+                        <span class="price">R$ 34,90</span>
+                        <button class="btn-select-burger" data-name="O Original" data-price="34.90" data-img="img/hamburguer1.jpg" data-ingredients="Blend 160g, Queijo Prato, Alface, Tomate, Maionese da Casa">Personalizar 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="img-container">
+                    <img src="img/hamburguer2.jpg" alt="Cheddar Flood" class="menu-item-img">
+                </div>
+                <div class="menu-item-info">
+                    <div>
+                        <h3>Cheddar Flood</h3>
+                        <p class="menu-item-desc">Avalanche de cheddar cremoso especial sobre dois blends de 100g, cebola caramelizada e bacon crocante.</p>
+                    </div>
+                    <div class="menu-item-footer">
+                        <span class="price">R$ 42,90</span>
+                        <button class="btn-select-burger" data-name="Cheddar Flood" data-price="42.90" data-img="img/hamburguer2.jpg" data-ingredients="2 Blends 100g, Cheddar Cremoso, Cebola Caramelizada, Bacon Crocante">Personalizar 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="img-container">
+                    <img src="img/hamburguer3.jpg" alt="Diablo Fuego" class="menu-item-img">
+                </div>
+                <div class="menu-item-info">
+                    <div>
+                        <h3>Diablo Fuego</h3>
+                        <p class="menu-item-desc">Blend 160g, queijo monterey jack, geleia de pimenta defumada, jalapeño e nachos crocantes.</p>
+                    </div>
+                    <div class="menu-item-footer">
+                        <span class="price">R$ 39,90</span>
+                        <button class="btn-select-burger" data-name="Diablo Fuego" data-price="39.90" data-img="img/hamburguer3.jpg" data-ingredients="Blend 160g, Monterey Jack, Geleia de Pimenta, Jalapeño, Nachos">Personalizar 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="img-container">
+                    <img src="img/hamburguer4.jpg" alt="Gourmet Brie" class="menu-item-img">
+                </div>
+                <div class="menu-item-info">
+                    <div>
+                        <h3>Gourmet Brie</h3>
+                        <p class="menu-item-desc">Blend nobre de Angus, fatias generosas de queijo Brie derretido, cogumelos salteados e rúcula fresca.</p>
+                    </div>
+                    <div class="menu-item-footer">
+                        <span class="price">R$ 49,90</span>
+                        <button class="btn-select-burger" data-name="Gourmet Brie" data-price="49.90" data-img="img/hamburguer4.jpg" data-ingredients="Blend Angus, Queijo Brie, Cogumelos, Rúcula">Personalizar 🛒</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="drinks-section">
+        <h2 class="drinks-title"><i class="fa-solid fa-bottle-water"></i> Bebidas Geladas</h2>
+        <p class="section-subtitle">Escolha as bebidas e a quantidade que deseja adicionar!</p>
+
+        <div class="drinks-grid">
+            <div class="drink-card">
+                <img src="img/coca.jpg" alt="Coca-Cola" class="drink-img">
+                <div class="drink-details">
+                    <h3>Coca-Cola</h3>
+                    <p class="drink-desc">Lata 350ml trincando de gelada.</p>
+                    <span class="price">R$ 6,50</span>
+                    <div class="drink-qty-controls">
+                        <button class="btn-drink-qty btn-drink-minus" data-id="coca">-</button>
+                        <span class="drink-qty-val" id="drink-qty-coca">0</span>
+                        <button class="btn-drink-qty btn-drink-plus" data-id="coca">+</button>
+                    </div>
+                    <button class="btn-add-drink" data-name="Coca-Cola 350ml" data-price="6.50" data-id="coca">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <img src="img/dolly.jpg" alt="Dolly Guaraná" class="drink-img">
+                <div class="drink-details">
+                    <h3>Dolly Guaraná</h3>
+                    <p class="drink-desc">O sabor brasileiro em lata 350ml.</p>
+                    <span class="price">R$ 4,50</span>
+                    <div class="drink-qty-controls">
+                        <button class="btn-drink-qty btn-drink-minus" data-id="dolly">-</button>
+                        <span class="drink-qty-val" id="drink-qty-dolly">0</span>
+                        <button class="btn-drink-qty btn-drink-plus" data-id="dolly">+</button>
+                    </div>
+                    <button class="btn-add-drink" data-name="Dolly Guaraná 350ml" data-price="4.50" data-id="dolly">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <img src="img/convencao.jpg" alt="Refrigerante Convenção" class="drink-img">
+                <div class="drink-details">
+                    <h3>Convenção</h3>
+                    <p class="drink-desc">Guaraná ou Tubaína geladíssima 350ml.</p>
+                    <span class="price">R$ 4,50</span>
+                    <div class="drink-qty-controls">
+                        <button class="btn-drink-qty btn-drink-minus" data-id="convencao">-</button>
+                        <span class="drink-qty-val" id="drink-qty-convencao">0</span>
+                        <button class="btn-drink-qty btn-drink-plus" data-id="convencao">+</button>
+                    </div>
+                    <button class="btn-add-drink" data-name="Convenção 350ml" data-price="4.50" data-id="convencao">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="drink-card">
+                <img src="img/sprite.jpg" alt="Sprite" class="drink-img">
+                <div class="drink-details">
+                    <h3>Sprite</h3>
+                    <p class="drink-desc">Sabor limão refrescante lata 350ml.</p>
+                    <span class="price">R$ 6,50</span>
+                    <div class="drink-qty-controls">
+                        <button class="btn-drink-qty btn-drink-minus" data-id="sprite">-</button>
+                        <span class="drink-qty-val" id="drink-qty-sprite">0</span>
+                        <button class="btn-drink-qty btn-drink-plus" data-id="sprite">+</button>
+                    </div>
+                    <button class="btn-add-drink" data-name="Sprite 350ml" data-price="6.50" data-id="sprite">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="customize-modal" class="modal">
+        <div class="modal-content customize-content">
+            <span class="close-customize-btn">&times;</span>
+            <div class="customize-header">
+                <img id="custom-burger-img" src="" alt="Burger">
+                <div>
+                    <h2 id="custom-burger-title">Nome do Burger</h2>
+                    <p id="custom-burger-price" class="price">R$ 0,00</p>
+                </div>
+            </div>
+
+            <div class="custom-section">
+                <h4><i class="fa-solid fa-minus-circle"></i> Retirar Ingredientes</h4>
+                <div id="remove-ingredients-container" class="options-grid"></div>
+            </div>
+
+            <div class="custom-section">
+                <h4><i class="fa-solid fa-plus-circle"></i> Acrescentar Adicionais</h4>
+                <div class="options-grid">
+                    <div class="custom-option-qty">
+                        <span class="extra-name">Bacon Extra (+ R$ 5,00)</span>
+                        <div class="qty-controls">
+                            <button class="btn-qty btn-minus" data-name="Bacon Extra" data-price="5.00">-</button>
+                            <span class="qty-value" id="qty-Bacon Extra">0</span>
+                            <button class="btn-qty btn-plus" data-name="Bacon Extra" data-price="5.00">+</button>
+                        </div>
+                    </div>
+                    <div class="custom-option-qty">
+                        <span class="extra-name">Cheddar Extra (+ R$ 4,00)</span>
+                        <div class="qty-controls">
+                            <button class="btn-qty btn-minus" data-name="Cheddar Extra" data-price="4.00">-</button>
+                            <span class="qty-value" id="qty-Cheddar Extra">0</span>
+                            <button class="btn-qty btn-plus" data-name="Cheddar Extra" data-price="4.00">+</button>
+                        </div>
+                    </div>
+                    <div class="custom-option-qty">
+                        <span class="extra-name">Ovo Frito (+ R$ 3,00)</span>
+                        <div class="qty-controls">
+                            <button class="btn-qty btn-minus" data-name="Ovo Frito" data-price="3.00">-</button>
+                            <span class="qty-value" id="qty-Ovo Frito">0</span>
+                            <button class="btn-qty btn-plus" data-name="Ovo Frito" data-price="3.00">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="custom-footer">
+                <button id="confirm-add-cart-btn" class="btn-order">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Seu Carrinho</h2>
+            
+            <div id="cart-items" class="cart-items"></div>
+
+            <div class="frete-box">
+                <h4><i class="fa-solid fa-truck"></i> Calcular Frete de Entrega</h4>
+                <div class="frete-input-group">
+                    <input type="text" id="cep-input" placeholder="Digite seu CEP" maxlength="9">
+                    <button id="calc-frete-btn">Calcular</button>
+                </div>
+                <p id="frete-result" class="frete-result"></p>
+            </div>
+
+            <div class="cart-total-container">
+                <div class="summary-line"><span>Subtotal:</span> <span id="cart-subtotal">R$ 0,00</span></div>
+                <div class="summary-line"><span>Frete:</span> <span id="cart-frete-val">R$ 0,00</span></div>
+                <hr class="summary-hr">
+                <h3>Total: <span id="cart-total-price">R$ 0,00</span></h3>
+                <button id="checkout-btn" class="btn-order">Finalizar Pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://tiktok.com" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+        <p>&copy; 2026 - Beatriz Burger - Os melhores hambúrgueres artesanais da cidade.</p>
+    </footer>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+    <script src="script.js"></script>
+</body>
+</html>
