@@ -166,7 +166,6 @@ body {
     gap: 25px;
 }
 
-/* --- EFEITOS DE HOVER NOS CARDS DE HAMBÚRGUER --- */
 .card-destaque, .menu-item {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -180,7 +179,6 @@ body {
                 box-shadow 0.35s ease;
 }
 
-/* Efeito ao passar o mouse por cima */
 .card-destaque:hover, .menu-item:hover {
     transform: translateY(-12px) scale(1.02);
     border-color: var(--accent-orange);
@@ -188,7 +186,6 @@ body {
                 0 0 20px var(--accent-glow);
 }
 
-/* Container de Imagem para controlar o Zoom */
 .img-container {
     width: 100%;
     height: 200px;
@@ -202,7 +199,6 @@ body {
     transition: transform 0.4s ease;
 }
 
-/* Zoom suave na imagem ao passar o mouse no card */
 .card-destaque:hover .card-destaque-img, 
 .menu-item:hover .menu-item-img {
     transform: scale(1.1);
@@ -245,7 +241,6 @@ body {
     font-size: 1.2rem;
 }
 
-/* --- EFEITOS DE HOVER NOS CARDS DE BEBIDAS --- */
 .drinks-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -362,6 +357,8 @@ body {
     max-width: 500px;
     padding: 25px;
     position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .close-btn, .close-customize-btn {
@@ -457,6 +454,72 @@ body {
     cursor: pointer;
 }
 
+/* SEÇÃO DE PAGAMENTO */
+.payment-box {
+    margin: 15px 0;
+    background: #121218;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+}
+
+.payment-box h4 {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+}
+
+.payment-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--card-border);
+    background: #1a1a24;
+    color: #ffffff;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.payment-extra-field {
+    margin-top: 10px;
+    padding: 10px;
+    background: #1a1a24;
+    border-radius: 6px;
+    border-left: 3px solid var(--accent-gold);
+}
+
+.payment-extra-field.hidden {
+    display: none;
+}
+
+.payment-extra-field label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+.payment-extra-field input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--card-border);
+    background: #121218;
+    color: #fff;
+}
+
+.pix-info {
+    font-size: 0.9rem;
+    color: #2ecc71;
+    margin-bottom: 4px;
+}
+
+.pix-subtext {
+    font-size: 0.75rem;
+    color: var(--text-gray);
+}
+
+/* RODAPÉ */
 footer {
     text-align: center;
     padding: 30px;

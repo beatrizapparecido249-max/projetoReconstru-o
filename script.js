@@ -1,3 +1,19 @@
+// CONFIGURAÇÃO E INICIALIZAÇÃO DO FIREBASE
+const firebaseConfig = {
+    apiKey: "AIzaSyCf4vdOr0eblxKV-HyHBgz6XJdL2_oQ0mg",
+    authDomain: "projetorecontrucao.firebaseapp.com",
+    projectId: "projetorecontrucao",
+    storageBucket: "projetorecontrucao.firebasestorage.app",
+    messagingSenderId: "1014398725340",
+    appId: "1:1014398725340:web:626bd48e32366ab61b9819"
+};
+
+// Inicialização do Firebase & Firestore
+if (typeof firebase !== 'undefined') {
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+}
+
 // ESTADO GLOBAL
 let cart = JSON.parse(localStorage.getItem('beatriz_cart')) || [];
 let freteValue = parseFloat(localStorage.getItem('beatriz_frete')) || 0;
@@ -28,11 +44,33 @@ const cepInput = document.getElementById('cep-input');
 const calcFreteBtn = document.getElementById('calc-frete-btn');
 const freteResult = document.getElementById('frete-result');
 
+// ELEMENTOS DE PAGAMENTO
+const paymentSelect = document.getElementById('payment-method');
+const trocoContainer = document.getElementById('troco-container');
+const trocoInput = document.getElementById('troco-input');
+const pixContainer = document.getElementById('pix-container');
+
 document.addEventListener('DOMContentLoaded', updateCartUI);
+
+// ALTERAÇÃO DO MÉTODO DE PAGAMENTO
+if (paymentSelect) {
+    paymentSelect.addEventListener('change', (e) => {
+        const value = e.target.value;
+
+        if (trocoContainer) trocoContainer.classList.add('hidden');
+        if (pixContainer) pixContainer.classList.add('hidden');
+
+        if (value === 'dinheiro' && trocoContainer) {
+            trocoContainer.classList.remove('hidden');
+        } else if (value === 'pix' && pixContainer) {
+            pixContainer.classList.remove('hidden');
+        }
+    });
+}
 
 // SELEÇÃO DE BEBIDAS (+ e -)
 document.querySelectorAll('.btn-drink-qty').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
         const drinkId = btn.getAttribute('data-id');
         const isPlus = btn.classList.contains('btn-drink-plus');
 
@@ -71,9 +109,9 @@ document.querySelectorAll('.btn-add-drink').forEach(btn => {
         cart.push(cartItem);
         saveAndUpdateCart();
 
-        // Reseta quantidade
         drinkQuantities[drinkId] = 0;
-        document.getElementById(`drink-qty-${drinkId}`).innerText = '0';
+        const qtySpan = document.getElementById(`drink-qty-${drinkId}`);
+        if (qtySpan) qtySpan.innerText = '0';
         alert(`${qty}x ${name} adicionado ao carrinho!`);
     });
 });
@@ -254,12 +292,64 @@ window.removeItem = (id) => {
 };
 
 if (cartBtn) cartBtn.onclick = () => cartModal.style.display = 'flex';
+
+// FINALIZAR PEDIDO (ENVIO AO FIREBASE)
 if (checkoutBtn) {
     checkoutBtn.onclick = () => {
-        if (cart.length === 0) return alert('Carrinho vazio!');
-        alert('Pedido realizado com sucesso!');
+        if (cart.length === 0) return alert('Seu carrinho está vazio!');
+
+        const paymentMethod = paymentSelect ? paymentSelect.value : '';
+        if (!paymentMethod) {
+            return alert('Por favor, selecione uma forma de pagamento antes de finalizar!');
+        }
+
+        let paymentDetailStr = '';
+        if (paymentMethod === 'pix') {
+            paymentDetailStr = 'Pix';
+        } else if (paymentMethod === 'credito') {
+            paymentDetailStr = 'Cartão de Crédito (Entrega)';
+        } else if (paymentMethod === 'debito') {
+            paymentDetailStr = 'Cartão de Débito (Entrega)';
+        } else if (paymentMethod === 'dinheiro') {
+            const troco = trocoInput && trocoInput.value ? ` (Troco para R$ ${parseFloat(trocoInput.value).toFixed(2)})` : ' (Sem troco)';
+            paymentDetailStr = `Dinheiro${troco}`;
+        }
+
+        const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
+        const total = subtotal + freteValue;
+
+        // Dados do pedido para enviar ao Firebase
+        const orderData = {
+            itens: cart,
+            subtotal: subtotal,
+            frete: freteValue,
+            total: total,
+            formaPagamento: paymentMethod,
+            detalhesPagamento: paymentDetailStr,
+            dataCriacao: new Date().toISOString(),
+            status: 'Pendente'
+        };
+
+        // Salvar pedido no Firestore
+        if (typeof db !== 'undefined') {
+            db.collection('pedidos').add(orderData)
+                .then((docRef) => {
+                    console.log('Pedido salvo no Firebase com ID: ', docRef.id);
+                })
+                .catch((error) => {
+                    console.error('Erro ao salvar no Firebase: ', error);
+                });
+        }
+
+        alert(`🎉 Pedido realizado com sucesso!\nForma de Pagamento: ${paymentDetailStr}\nObrigado por escolher a Beatriz Burger!`);
+
+        // Reseta o carrinho
         cart = [];
         saveAndUpdateCart();
+        if (paymentSelect) paymentSelect.value = '';
+        if (trocoInput) trocoInput.value = '';
+        if (trocoContainer) trocoContainer.classList.add('hidden');
+        if (pixContainer) pixContainer.classList.add('hidden');
         cartModal.style.display = 'none';
     };
 }
